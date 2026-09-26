@@ -792,7 +792,7 @@ void unified_bed_leveling::shift_mesh_height() {
 
       if (best.pos.x >= 0) {    // mesh point found and is reachable by probe
         const xy_pos_t mp = best.meshpos();
-        SERIAL_ECHOLNPGM("  XYLOG grid(", best.pos.x, ",", best.pos.y, ") nozzle X:", mp.x, " Y:", mp.y, " probeX:", mp.x + probe.offset_xy.x, " probeY:", mp.y + probe.offset_xy.y);
+        SERIAL_ECHOLNPGM("  XYLOG grid(", best.pos.x, ",", best.pos.y, ") probe X:", mp.x, " Y:", mp.y, " nozzleX:", mp.x - probe.offset_xy.x, " nozzleY:", mp.y - probe.offset_xy.y);
         TERN_(EXTENSIBLE_UI, ExtUI::onMeshUpdate(best.pos, ExtUI::G29_POINT_START));
         const float measured_z = probe.probe_at_point(
                       best.meshpos(),

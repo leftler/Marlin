@@ -1952,7 +1952,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of flash!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
   // Set a height for the start of manual adjustment
@@ -2030,6 +2030,12 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
+  // Mesh limited to the area the BLTouch can actually reach (probe = nozzle + {-47.3, -4.8}):
+  // probe X max = 235 - 47.3 = 187.7, probe Y max = 235 - 4.8 = 230.2; margins keep X >= 10, Y >= 5.
+  #define MESH_MIN_X 10
+  #define MESH_MAX_X 187
+  #define MESH_MIN_Y 6
+  #define MESH_MAX_Y 229
   #define GRID_MAX_POINTS_X 7       // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 

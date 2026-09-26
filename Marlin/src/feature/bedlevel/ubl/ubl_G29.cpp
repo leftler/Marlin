@@ -791,22 +791,17 @@ void unified_bed_leveling::shift_mesh_height() {
         : find_closest_mesh_point_of_type(INVALID, nearby, true);
 
       if (best.pos.x >= 0) {    // mesh point found and is reachable by probe
-        const xy_pos_t mp = best.meshpos();
-        SERIAL_ECHOLNPGM("  XYLOG grid(", best.pos.x, ",", best.pos.y, ") probe X:", mp.x, " Y:", mp.y, " nozzleX:", mp.x - probe.offset_xy.x, " nozzleY:", mp.y - probe.offset_xy.y);
         TERN_(EXTENSIBLE_UI, ExtUI::onMeshUpdate(best.pos, ExtUI::G29_POINT_START));
         const float measured_z = probe.probe_at_point(
                       best.meshpos(),
                       stow_probe ? PROBE_PT_STOW : PROBE_PT_RAISE, param.V_verbosity
                     );
         z_values[best.pos.x][best.pos.y] = measured_z;
-        SERIAL_ECHOLNPGM("  XYLOG z:", measured_z);
         #if ENABLED(EXTENSIBLE_UI)
           ExtUI::onMeshUpdate(best.pos, ExtUI::G29_POINT_FINISH);
           ExtUI::onMeshUpdate(best.pos, measured_z);
         #endif
       }
-      else
-        SERIAL_ECHOLNPGM("  XYLOG no reachable invalid points remain (probed ", point_num - 1, " of ", GRID_MAX_POINTS, ")");
       SERIAL_FLUSH(); // Prevent host M105 buffer overrun.
 
     } while (best.pos.x >= 0 && --count);

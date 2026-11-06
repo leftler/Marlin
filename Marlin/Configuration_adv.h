@@ -1732,6 +1732,7 @@
   #if ENABLED(BINARY_FILE_TRANSFER)
     // Include extra facilities (e.g., 'M20 F') supporting firmware upload via BINARY_FILE_TRANSFER
     #define CUSTOM_FIRMWARE_UPLOAD
+    #define DO_LIST_BIN_FILES 1   // 2.1.2.8 only sets this for ProUI, so 'M20 F' can't see .bin files without it
   #endif
 
   /**

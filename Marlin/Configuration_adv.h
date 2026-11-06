@@ -1031,11 +1031,11 @@
 //
 // Add the G35 command to read bed corners to help adjust screws. Requires a bed probe.
 //
-//#define ASSISTED_TRAMMING
+#define ASSISTED_TRAMMING
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define from 3 to 9 points to probe.
-  #define TRAMMING_POINT_XY { {  20, 20 }, { 180,  20 }, { 180, 180 }, { 20, 180 } }
+  #define TRAMMING_POINT_XY { {  30, 34 }, { 187,  34 }, { 187, 203 }, { 30, 202 } }
 
   // Define position names for probe points.
   #define TRAMMING_POINT_NAME_1 "Front-Left"
@@ -2404,7 +2404,7 @@
 
 // The ASCII buffer for serial input
 #define MAX_CMD_SIZE 96
-#define BUFSIZE 4
+#define BUFSIZE 8
 
 // Transmission to Host Buffer Size
 // To save 386 bytes of flash (and TX_BUFFER_SIZE+3 bytes of RAM) set to 0.
@@ -2482,7 +2482,7 @@
 //#define NO_TIMEOUTS 1000 // (ms)
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
-//#define ADVANCED_OK
+#define ADVANCED_OK
 
 // Printrun may have trouble receiving long strings all at once.
 // This option inserts short delays between lines of serial output.
